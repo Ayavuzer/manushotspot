@@ -6,7 +6,7 @@ import {
   DialogActions, 
   Button, 
   TextField, 
-  Grid as MuiGrid,
+  Grid,
   FormControlLabel,
   Switch,
   CircularProgress,
@@ -109,8 +109,8 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                 </Alert>
               )}
               
-              <MuiGrid container spacing={2}>
-                <MuiGrid item xs={12} sm={6}>
+              <Grid container spacing={2}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -119,9 +119,9 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     error={touched.name && Boolean(errors.name)}
                     helperText={touched.name && errors.name}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -131,9 +131,9 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     error={touched.firewall_type_id && Boolean(errors.firewall_type_id)}
                     helperText={touched.firewall_type_id && errors.firewall_type_id}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -142,9 +142,9 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     error={touched.ip_address && Boolean(errors.ip_address)}
                     helperText={touched.ip_address && errors.ip_address}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -154,9 +154,9 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     error={touched.port && Boolean(errors.port)}
                     helperText={touched.port && errors.port}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -165,9 +165,9 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     error={touched.username && Boolean(errors.username)}
                     helperText={touched.username && errors.username}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -177,9 +177,9 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     error={touched.password && Boolean(errors.password)}
                     helperText={touched.password && errors.password}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12}>
+                <Grid xs={12}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -188,9 +188,9 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     error={touched.api_key && Boolean(errors.api_key)}
                     helperText={touched.api_key && errors.api_key}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -200,9 +200,9 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     error={touched.organization_id && Boolean(errors.organization_id)}
                     helperText={touched.organization_id && errors.organization_id}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12}>
+                <Grid xs={12}>
                   <FormControlLabel
                     control={
                       <Switch
@@ -214,8 +214,8 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     }
                     label="Aktif"
                   />
-                </MuiGrid>
-              </MuiGrid>
+                </Grid>
+              </Grid>
             </DialogContent>
             
             <DialogActions>

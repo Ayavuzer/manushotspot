@@ -5,7 +5,7 @@ import {
   Paper, 
   Button, 
   Box, 
-  Grid as MuiGrid, 
+  Grid, 
   CircularProgress, 
   Alert 
 } from '@mui/material';

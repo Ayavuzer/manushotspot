@@ -6,7 +6,7 @@ import {
   DialogActions, 
   Button, 
   TextField, 
-  Grid as MuiGrid,
+  Grid,
   FormControlLabel,
   Switch,
   CircularProgress,
@@ -107,8 +107,8 @@ const UserDialog: React.FC<UserDialogProps> = ({
                 </Alert>
               )}
               
-              <MuiGrid container spacing={2}>
-                <MuiGrid item xs={12} sm={6}>
+              <Grid container spacing={2}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -117,9 +117,9 @@ const UserDialog: React.FC<UserDialogProps> = ({
                     error={touched.username && Boolean(errors.username)}
                     helperText={touched.username && errors.username}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -128,9 +128,9 @@ const UserDialog: React.FC<UserDialogProps> = ({
                     error={touched.email && Boolean(errors.email)}
                     helperText={touched.email && errors.email}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -140,9 +140,9 @@ const UserDialog: React.FC<UserDialogProps> = ({
                     error={touched.password && Boolean(errors.password)}
                     helperText={touched.password && errors.password}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -151,9 +151,9 @@ const UserDialog: React.FC<UserDialogProps> = ({
                     error={touched.phone && Boolean(errors.phone)}
                     helperText={touched.phone && errors.phone}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -162,9 +162,9 @@ const UserDialog: React.FC<UserDialogProps> = ({
                     error={touched.first_name && Boolean(errors.first_name)}
                     helperText={touched.first_name && errors.first_name}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -173,9 +173,9 @@ const UserDialog: React.FC<UserDialogProps> = ({
                     error={touched.last_name && Boolean(errors.last_name)}
                     helperText={touched.last_name && errors.last_name}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -185,9 +185,9 @@ const UserDialog: React.FC<UserDialogProps> = ({
                     error={touched.role_id && Boolean(errors.role_id)}
                     helperText={touched.role_id && errors.role_id}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -197,9 +197,9 @@ const UserDialog: React.FC<UserDialogProps> = ({
                     error={touched.organization_id && Boolean(errors.organization_id)}
                     helperText={touched.organization_id && errors.organization_id}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12}>
+                <Grid xs={12}>
                   <FormControlLabel
                     control={
                       <Switch
@@ -211,8 +211,8 @@ const UserDialog: React.FC<UserDialogProps> = ({
                     }
                     label="Aktif"
                   />
-                </MuiGrid>
-              </MuiGrid>
+                </Grid>
+              </Grid>
             </DialogContent>
             
             <DialogActions>

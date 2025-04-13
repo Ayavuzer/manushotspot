@@ -6,7 +6,7 @@ import {
   DialogActions, 
   Button, 
   TextField, 
-  Grid as MuiGrid,
+  Grid,
   FormControlLabel,
   Switch,
   CircularProgress,
@@ -101,8 +101,8 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                 </Alert>
               )}
               
-              <MuiGrid container spacing={2}>
-                <MuiGrid item xs={12}>
+              <Grid container spacing={2}>
+                <Grid xs={12}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -111,9 +111,9 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                     error={touched.name && Boolean(errors.name)}
                     helperText={touched.name && errors.name}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -122,9 +122,9 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                     error={touched.email && Boolean(errors.email)}
                     helperText={touched.email && errors.email}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -133,9 +133,9 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                     error={touched.phone && Boolean(errors.phone)}
                     helperText={touched.phone && errors.phone}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12}>
+                <Grid xs={12}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -146,9 +146,9 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                     error={touched.address && Boolean(errors.address)}
                     helperText={touched.address && errors.address}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12}>
+                <Grid xs={12}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -159,9 +159,9 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                     error={touched.description && Boolean(errors.description)}
                     helperText={touched.description && errors.description}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12}>
+                <Grid xs={12}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -170,9 +170,9 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                     error={touched.logo_url && Boolean(errors.logo_url)}
                     helperText={touched.logo_url && errors.logo_url}
                   />
-                </MuiGrid>
+                </Grid>
                 
-                <MuiGrid item xs={12}>
+                <Grid xs={12}>
                   <FormControlLabel
                     control={
                       <Switch
@@ -184,8 +184,8 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                     }
                     label="Aktif"
                   />
-                </MuiGrid>
-              </MuiGrid>
+                </Grid>
+              </Grid>
             </DialogContent>
             
             <DialogActions>
