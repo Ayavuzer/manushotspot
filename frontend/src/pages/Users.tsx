@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, Paper, Button, Box, Grid, CircularProgress, Alert } from '@mui/material';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Add as AddIcon, Refresh as RefreshIcon } from '@mui/icons-material';
 import Layout from '../components/Layout';
 import { userApi } from '../services/userService';
@@ -60,16 +60,16 @@ const Users: React.FC = () => {
       field: 'fullName',
       headerName: 'Ad Soyad',
       width: 180,
-      valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.first_name || ''} ${params.row.last_name || ''}`,
+      valueGetter: (value, row) =>
+        `${row.first_name || ''} ${row.last_name || ''}`,
     },
     { field: 'role', headerName: 'Rol', width: 150 },
     {
       field: 'is_active',
       headerName: 'Durum',
       width: 120,
-      valueGetter: (params: GridValueGetterParams) =>
-        params.row.is_active ? 'Aktif' : 'Pasif',
+      valueGetter: (value, row) =>
+        row.is_active ? 'Aktif' : 'Pasif',
     },
     {
       field: 'actions',

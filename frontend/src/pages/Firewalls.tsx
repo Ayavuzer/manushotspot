@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, Paper, Button, Box, Grid, CircularProgress, Alert } from '@mui/material';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Add as AddIcon, Refresh as RefreshIcon } from '@mui/icons-material';
 import Layout from '../components/Layout';
 import { firewallApi } from '../services/firewallService';
@@ -85,7 +85,7 @@ const Firewalls: React.FC = () => {
       field: 'firewall_type_id', 
       headerName: 'Firewall Türü', 
       width: 150,
-      valueGetter: (params: GridValueGetterParams) => getFirewallTypeName(params.row.firewall_type_id)
+      valueGetter: (value, row) => getFirewallTypeName(row.firewall_type_id)
     },
     { field: 'ip_address', headerName: 'IP Adresi', width: 150 },
     { field: 'port', headerName: 'Port', width: 100 },
@@ -107,8 +107,7 @@ const Firewalls: React.FC = () => {
       field: 'is_active',
       headerName: 'Durum',
       width: 120,
-      valueGetter: (params: GridValueGetterParams) =>
-        params.row.is_active ? 'Aktif' : 'Pasif',
+      valueGetter: (value, row) => row.is_active ? 'Aktif' : 'Pasif',
     },
     {
       field: 'actions',

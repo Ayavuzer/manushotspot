@@ -9,7 +9,7 @@ import {
   CircularProgress, 
   Alert 
 } from '@mui/material';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Add as AddIcon, Refresh as RefreshIcon } from '@mui/icons-material';
 import Layout from '../components/Layout';
 import { organizationApi } from '../services/organizationService';
@@ -71,8 +71,8 @@ const Organizations: React.FC = () => {
       field: 'is_active',
       headerName: 'Durum',
       width: 120,
-      valueGetter: (params: GridValueGetterParams) =>
-        params.row.is_active ? 'Aktif' : 'Pasif',
+      valueGetter: (value, row) =>
+        row.is_active ? 'Aktif' : 'Pasif',
     },
     {
       field: 'actions',
