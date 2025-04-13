@@ -110,7 +110,7 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
               )}
               
               <Grid container spacing={2}>
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -121,7 +121,7 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -133,7 +133,7 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -144,7 +144,7 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -156,7 +156,7 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -167,7 +167,7 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -179,7 +179,7 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid size={{ xs: 12 }}>
+                <Grid item xs={12}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -190,7 +190,7 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid size={{ xs: 12, sm: 6 }}>
+                <Grid item xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -202,7 +202,7 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid size={{ xs: 12 }}>
+                <Grid item xs={12}>
                   <FormControlLabel
                     control={
                       <Switch

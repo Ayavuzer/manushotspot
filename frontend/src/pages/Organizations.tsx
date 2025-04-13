@@ -71,8 +71,8 @@ const Organizations: React.FC = () => {
       field: 'is_active',
       headerName: 'Durum',
       width: 120,
-      valueGetter: (value, row) =>
-        row.is_active ? 'Aktif' : 'Pasif',
+      valueGetter: (params) =>
+        params.row.is_active ? 'Aktif' : 'Pasif',
     },
     {
       field: 'actions',

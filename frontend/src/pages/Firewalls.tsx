@@ -85,7 +85,7 @@ const Firewalls: React.FC = () => {
       field: 'firewall_type_id', 
       headerName: 'Firewall Türü', 
       width: 150,
-      valueGetter: (value, row) => getFirewallTypeName(row.firewall_type_id)
+      valueGetter: (params) => getFirewallTypeName(params.row.firewall_type_id)
     },
     { field: 'ip_address', headerName: 'IP Adresi', width: 150 },
     { field: 'port', headerName: 'Port', width: 100 },
@@ -107,7 +107,7 @@ const Firewalls: React.FC = () => {
       field: 'is_active',
       headerName: 'Durum',
       width: 120,
-      valueGetter: (value, row) => row.is_active ? 'Aktif' : 'Pasif',
+      valueGetter: (params) => params.row.is_active ? 'Aktif' : 'Pasif',
     },
     {
       field: 'actions',

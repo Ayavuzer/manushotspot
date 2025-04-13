@@ -60,16 +60,16 @@ const Users: React.FC = () => {
       field: 'fullName',
       headerName: 'Ad Soyad',
       width: 180,
-      valueGetter: (value, row) =>
-        `${row.first_name || ''} ${row.last_name || ''}`,
+      valueGetter: (params) =>
+        `${params.row.first_name || ''} ${params.row.last_name || ''}`,
     },
     { field: 'role', headerName: 'Rol', width: 150 },
     {
       field: 'is_active',
       headerName: 'Durum',
       width: 120,
-      valueGetter: (value, row) =>
-        row.is_active ? 'Aktif' : 'Pasif',
+      valueGetter: (params) =>
+        params.row.is_active ? 'Aktif' : 'Pasif',
     },
     {
       field: 'actions',
