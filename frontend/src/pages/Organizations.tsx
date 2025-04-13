@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, Paper, Button, Box, Grid, CircularProgress, Alert } from '@mui/material';
+import { 
+  Container, 
+  Typography, 
+  Paper, 
+  Button, 
+  Box, 
+  Grid as MuiGrid, 
+  CircularProgress, 
+  Alert 
+} from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Add as AddIcon, Refresh as RefreshIcon } from '@mui/icons-material';
 import Layout from '../components/Layout';
@@ -136,7 +145,6 @@ const Organizations: React.FC = () => {
           </Box>
         </Paper>
 
-        {/* Organization Dialog will be implemented as a separate component */}
         {openDialog && (
           <OrganizationDialog
             open={openDialog}

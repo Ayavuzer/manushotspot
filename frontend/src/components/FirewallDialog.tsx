@@ -6,46 +6,39 @@ import {
   DialogActions, 
   Button, 
   TextField, 
-  FormControl, 
-  InputLabel, 
-  Select, 
-  MenuItem, 
-  FormHelperText,
-  Grid,
-  Switch,
+  Grid as MuiGrid,
   FormControlLabel,
+  Switch,
   CircularProgress,
   Alert
 } from '@mui/material';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
-import { FirewallConfig, FirewallType, FirewallConfigRequest } from '../types';
+import { FirewallConfig } from '../types';
 import { firewallApi } from '../services/firewallService';
 
 interface FirewallDialogProps {
   open: boolean;
   firewall: FirewallConfig | null;
-  firewallTypes: FirewallType[];
   onClose: () => void;
   onSave: () => void;
 }
 
 interface FirewallFormValues {
   name: string;
-  firewall_type_id: number;
+  type_id: number;
   ip_address: string;
-  port: string;
+  port: number;
   username: string;
   password: string;
   api_key: string;
-  is_active: boolean;
   organization_id: number;
+  is_active: boolean;
 }
 
 const FirewallDialog: React.FC<FirewallDialogProps> = ({ 
   open, 
   firewall, 
-  firewallTypes, 
   onClose, 
   onSave 
 }) => {
@@ -54,25 +47,25 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
 
   const initialValues: FirewallFormValues = {
     name: firewall?.name || '',
-    firewall_type_id: firewall?.firewall_type_id || (firewallTypes[0]?.id || 1),
+    type_id: firewall?.type_id || 1, // Default to Sophos
     ip_address: firewall?.ip_address || '',
-    port: firewall?.port?.toString() || '',
+    port: firewall?.port || 443,
     username: firewall?.username || '',
-    password: '',
-    api_key: '',
-    is_active: firewall?.is_active !== undefined ? firewall.is_active : true,
-    organization_id: firewall?.organization_id || 1
+    password: firewall?.password || '',
+    api_key: firewall?.api_key || '',
+    organization_id: firewall?.organization_id || 1,
+    is_active: firewall?.is_active !== undefined ? firewall.is_active : true
   };
 
   const validationSchema = Yup.object({
     name: Yup.string().required('Firewall adı gerekli'),
-    firewall_type_id: Yup.number().required('Firewall türü seçimi gerekli'),
+    type_id: Yup.number().required('Firewall tipi gerekli'),
     ip_address: Yup.string().required('IP adresi gerekli'),
-    port: Yup.string(),
+    port: Yup.number().required('Port gerekli'),
     username: Yup.string(),
-    password: isEditMode ? Yup.string() : Yup.string(),
+    password: Yup.string(),
     api_key: Yup.string(),
-    organization_id: Yup.number().required('Organizasyon seçimi gerekli')
+    organization_id: Yup.number().required('Organizasyon gerekli')
   });
 
   const handleSubmit = async (
@@ -82,33 +75,10 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
     try {
       setError(null);
       
-      // Convert port to number if provided
-      const port = values.port ? parseInt(values.port) : undefined;
-      
-      // Prepare data for API
-      const data: FirewallConfigRequest = {
-        name: values.name,
-        firewall_type_id: values.firewall_type_id,
-        ip_address: values.ip_address,
-        port,
-        username: values.username || undefined,
-        organization_id: values.organization_id,
-        is_active: values.is_active
-      };
-      
-      // Only include password and api_key if provided
-      if (values.password) {
-        data.password = values.password;
-      }
-      
-      if (values.api_key) {
-        data.api_key = values.api_key;
-      }
-      
       if (isEditMode) {
-        await firewallApi.updateFirewallConfig(firewall.id, data);
+        await firewallApi.updateFirewall(firewall.id, values);
       } else {
-        await firewallApi.createFirewallConfig(data);
+        await firewallApi.createFirewall(values);
       }
       
       onSave();
@@ -137,8 +107,8 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                 </Alert>
               )}
               
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+              <MuiGrid container spacing={2}>
+                <MuiGrid item xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -147,28 +117,21 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     error={touched.name && Boolean(errors.name)}
                     helperText={touched.name && errors.name}
                   />
-                </Grid>
+                </MuiGrid>
                 
-                <Grid item xs={12} sm={6}>
-                  <FormControl fullWidth error={touched.firewall_type_id && Boolean(errors.firewall_type_id)}>
-                    <InputLabel>Firewall Türü</InputLabel>
-                    <Select
-                      name="firewall_type_id"
-                      value={values.firewall_type_id}
-                      onChange={handleChange}
-                      label="Firewall Türü"
-                    >
-                      {firewallTypes.map(type => (
-                        <MenuItem key={type.id} value={type.id}>{type.name}</MenuItem>
-                      ))}
-                    </Select>
-                    {touched.firewall_type_id && errors.firewall_type_id && (
-                      <FormHelperText>{errors.firewall_type_id}</FormHelperText>
-                    )}
-                  </FormControl>
-                </Grid>
+                <MuiGrid item xs={12} sm={6}>
+                  <Field
+                    as={TextField}
+                    fullWidth
+                    name="type_id"
+                    label="Firewall Tipi"
+                    type="number"
+                    error={touched.type_id && Boolean(errors.type_id)}
+                    helperText={touched.type_id && errors.type_id}
+                  />
+                </MuiGrid>
                 
-                <Grid item xs={12} sm={6}>
+                <MuiGrid item xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -177,9 +140,9 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     error={touched.ip_address && Boolean(errors.ip_address)}
                     helperText={touched.ip_address && errors.ip_address}
                   />
-                </Grid>
+                </MuiGrid>
                 
-                <Grid item xs={12} sm={6}>
+                <MuiGrid item xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -189,9 +152,9 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     error={touched.port && Boolean(errors.port)}
                     helperText={touched.port && errors.port}
                   />
-                </Grid>
+                </MuiGrid>
                 
-                <Grid item xs={12} sm={6}>
+                <MuiGrid item xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -200,32 +163,44 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     error={touched.username && Boolean(errors.username)}
                     helperText={touched.username && errors.username}
                   />
-                </Grid>
+                </MuiGrid>
                 
-                <Grid item xs={12} sm={6}>
+                <MuiGrid item xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
                     name="password"
-                    label={isEditMode ? "Şifre (değiştirmek için doldurun)" : "Şifre"}
+                    label="Şifre"
                     type="password"
                     error={touched.password && Boolean(errors.password)}
                     helperText={touched.password && errors.password}
                   />
-                </Grid>
+                </MuiGrid>
                 
-                <Grid item xs={12}>
+                <MuiGrid item xs={12}>
                   <Field
                     as={TextField}
                     fullWidth
                     name="api_key"
-                    label={isEditMode ? "API Anahtarı (değiştirmek için doldurun)" : "API Anahtarı"}
+                    label="API Anahtarı"
                     error={touched.api_key && Boolean(errors.api_key)}
                     helperText={touched.api_key && errors.api_key}
                   />
-                </Grid>
+                </MuiGrid>
                 
-                <Grid item xs={12}>
+                <MuiGrid item xs={12} sm={6}>
+                  <Field
+                    as={TextField}
+                    fullWidth
+                    name="organization_id"
+                    label="Organizasyon ID"
+                    type="number"
+                    error={touched.organization_id && Boolean(errors.organization_id)}
+                    helperText={touched.organization_id && errors.organization_id}
+                  />
+                </MuiGrid>
+                
+                <MuiGrid item xs={12}>
                   <FormControlLabel
                     control={
                       <Switch
@@ -237,8 +212,8 @@ const FirewallDialog: React.FC<FirewallDialogProps> = ({
                     }
                     label="Aktif"
                   />
-                </Grid>
-              </Grid>
+                </MuiGrid>
+              </MuiGrid>
             </DialogContent>
             
             <DialogActions>
