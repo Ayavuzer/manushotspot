@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: hotspot-backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - API_VERSION=v1
+      - DB_USER=postgres
+      - DB_PASSWORD=112446Aa
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=mrtbt
+      - DB_SSL=false
+      - RABBITMQ_URL=amqps://ixavmtsc:0fTOOtTQFBXEdcs6yFm8vVkF5xAYRCXX@ostrich.lmq.cloudamqp.com/ixavmtsc
+      - JWT_SECRET=hotspot_jwt_secret_key_change_in_production
+      - JWT_REFRESH_SECRET=hotspot_refresh_secret_key_change_in_production
+      - JWT_EXPIRES_IN=1h
+      - JWT_REFRESH_EXPIRES_IN=7d
+      - CORS_ORIGIN=*
+    depends_on:
+      - postgres
+    networks:
+      - hotspot-network
+
+  frontend:
+    build: ./frontend
+    container_name: hotspot-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - hotspot-network
+
+  postgres:
+    image: postgres:13
+    container_name: hotspot-postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=112446Aa
+      - POSTGRES_DB=mrtbt
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - hotspot-network
+
+networks:
+  hotspot-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
