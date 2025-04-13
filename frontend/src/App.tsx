@@ -79,6 +79,14 @@ const App: React.FC = () => {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <NotFound />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/*" element={<NotFound />} />
           </Routes>
         </Router>
