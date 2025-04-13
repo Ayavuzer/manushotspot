@@ -14,12 +14,13 @@ import {
 } from '@mui/material';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
-import { FirewallConfig } from '../types';
+import { FirewallConfig, FirewallType } from '../types';
 import { firewallApi } from '../services/firewallService';
 
 interface FirewallDialogProps {
   open: boolean;
   firewall: FirewallConfig | null;
+  firewallTypes?: FirewallType[];
   onClose: () => void;
   onSave: () => void;
 }
@@ -39,6 +40,7 @@ interface FirewallFormValues {
 const FirewallDialog: React.FC<FirewallDialogProps> = ({ 
   open, 
   firewall, 
+  firewallTypes,
   onClose, 
   onSave 
 }) => {

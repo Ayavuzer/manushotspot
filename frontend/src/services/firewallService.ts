@@ -36,5 +36,14 @@ export const firewallApi = {
   testFirewallConnection: async (id: number): Promise<ApiResponse<{ status: string }>> => {
     const response = await api.post<ApiResponse<{ status: string }>>(`/firewalls/${id}/test-connection`);
     return response.data;
+  },
+  
+  // Alias methods to maintain compatibility with existing code
+  createFirewall: async (data: Partial<FirewallConfig>): Promise<ApiResponse<{ firewallConfig: FirewallConfig }>> => {
+    return firewallApi.createFirewallConfig(data);
+  },
+  
+  updateFirewall: async (id: number, data: Partial<FirewallConfig>): Promise<ApiResponse<{ firewallConfig: FirewallConfig }>> => {
+    return firewallApi.updateFirewallConfig(id, data);
   }
 };
