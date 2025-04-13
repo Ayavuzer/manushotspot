@@ -73,6 +73,8 @@ export interface FirewallConfig {
   ip_address: string;
   port: number | null;
   username: string | null;
+  password?: string | null;
+  api_key?: string | null;
   is_active: boolean;
   connection_status: string | null;
   last_connected: string | null;
