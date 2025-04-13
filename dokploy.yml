@@ -1,0 +1,24 @@
+# Dokploy Configuration File
+
+app:
+  name: hotspot-app
+  type: nodejs
+  buildCommand: cd backend && npm install
+  startCommand: cd backend && node src/app.js
+  port: 3000
+  env:
+    - NODE_ENV=production
+    - PORT=3000
+    - API_VERSION=v1
+    - DB_USER=postgres
+    - DB_PASSWORD=112446Aa
+    - DB_HOST=postgres
+    - DB_PORT=5432
+    - DB_NAME=mrtbt
+    - DB_SSL=false
+    - RABBITMQ_URL=amqps://ixavmtsc:0fTOOtTQFBXEdcs6yFm8vVkF5xAYRCXX@ostrich.lmq.cloudamqp.com/ixavmtsc
+    - JWT_SECRET=hotspot_jwt_secret_key_change_in_production
+    - JWT_REFRESH_SECRET=hotspot_refresh_secret_key_change_in_production
+    - JWT_EXPIRES_IN=1h
+    - JWT_REFRESH_EXPIRES_IN=7d
+    - CORS_ORIGIN=*
