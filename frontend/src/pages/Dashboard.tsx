@@ -31,7 +31,7 @@ const Dashboard: React.FC = () => {
         
         <Grid container spacing={3}>
           {/* Stat Cards */}
-          <Grid component="div" item size={{ xs: 12, sm: 6, md: 3 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <StatCard elevation={3}>
               <Typography variant="h6" color="primary">
                 Aktif Kullanıcılar
@@ -40,7 +40,7 @@ const Dashboard: React.FC = () => {
             </StatCard>
           </Grid>
           
-          <Grid component="div" item size={{ xs: 12, sm: 6, md: 3 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <StatCard elevation={3}>
               <Typography variant="h6" color="primary">
                 Toplam Oturumlar
@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
             </StatCard>
           </Grid>
           
-          <Grid component="div" item size={{ xs: 12, sm: 6, md: 3 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <StatCard elevation={3}>
               <Typography variant="h6" color="primary">
                 Firewall Bağlantıları
@@ -58,7 +58,7 @@ const Dashboard: React.FC = () => {
             </StatCard>
           </Grid>
           
-          <Grid component="div" item size={{ xs: 12, sm: 6, md: 3 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <StatCard elevation={3}>
               <Typography variant="h6" color="primary">
                 Organizasyonlar
@@ -68,7 +68,7 @@ const Dashboard: React.FC = () => {
           </Grid>
           
           {/* Recent Activity */}
-          <Grid component="div" item size={{ xs: 12, md: 8 }}>
+          <Grid size={{ xs: 12, md: 8 }}>
             <StyledPaper elevation={3}>
               <Typography variant="h6" gutterBottom>
                 Son Aktiviteler
@@ -80,7 +80,7 @@ const Dashboard: React.FC = () => {
           </Grid>
           
           {/* System Status */}
-          <Grid component="div" item size={{ xs: 12, md: 4 }}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <StyledPaper elevation={3}>
               <Typography variant="h6" gutterBottom>
                 Sistem Durumu
