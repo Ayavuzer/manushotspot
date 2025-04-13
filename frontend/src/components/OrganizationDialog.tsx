@@ -102,7 +102,7 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
               )}
               
               <Grid container spacing={2}>
-                <Grid xs={12}>
+                <Grid component="div" xs={12}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -113,7 +113,7 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid xs={12} sm={6}>
+                <Grid component="div" xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -124,7 +124,7 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid xs={12} sm={6}>
+                <Grid component="div" xs={12} sm={6}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -135,7 +135,7 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid xs={12}>
+                <Grid component="div" xs={12}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -148,7 +148,7 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid xs={12}>
+                <Grid component="div" xs={12}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -161,7 +161,7 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid xs={12}>
+                <Grid component="div" xs={12}>
                   <Field
                     as={TextField}
                     fullWidth
@@ -172,7 +172,7 @@ const OrganizationDialog: React.FC<OrganizationDialogProps> = ({
                   />
                 </Grid>
                 
-                <Grid xs={12}>
+                <Grid component="div" xs={12}>
                   <FormControlLabel
                     control={
                       <Switch
