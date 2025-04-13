@@ -1,87 +1,58 @@
 const express = require('express');
+const app = express();
+const path = require('path');
 const cors = require('cors');
-const helmet = require('helmet');
 const morgan = require('morgan');
-const { connectRedis } = require('./config/redis');
-const { connectRabbitMQ } = require('./config/rabbitmq');
-const sequelize = require('./config/database');
-const logger = require('./config/logger');
+const helmet = require('helmet');
 require('dotenv').config();
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
-const organizationRoutes = require('./routes/organizationRoutes');
 const userRoutes = require('./routes/userRoutes');
-const firewallRoutes = require('./routes/firewallRoutes');
-
-// Initialize Express app
-const app = express();
-const PORT = process.env.PORT || 3000;
-const API_VERSION = process.env.API_VERSION || 'v1';
+const organizationRoutes = require('./routes/organizationRoutes');
+const firewallConfigRoutes = require('./routes/firewallConfigRoutes');
+const firewallLogRoutes = require('./routes/firewallLogRoutes');
+const userOrganizationRoutes = require('./routes/userOrganizationRoutes');
+const adminSetupRoutes = require('./routes/adminSetupRoutes');
 
 // Middleware
-app.use(helmet()); // Security headers
-app.use(cors({
-  origin: process.env.CORS_ORIGIN || '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
-app.use(express.json()); // Parse JSON bodies
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
-app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } })); // HTTP request logging
+app.use(cors());
+app.use(helmet());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 
-// API routes
-app.use(`/api/${API_VERSION}/auth`, authRoutes);
-app.use(`/api/${API_VERSION}/organizations`, organizationRoutes);
-app.use(`/api/${API_VERSION}/users`, userRoutes);
-app.use(`/api/${API_VERSION}/firewalls`, firewallRoutes);
+// API Routes
+const apiVersion = process.env.API_VERSION || 'v1';
+const apiPrefix = `/api/${apiVersion}`;
 
-// Health check endpoint
-app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'ok', timestamp: new Date() });
-});
+app.use(`${apiPrefix}/auth`, authRoutes);
+app.use(`${apiPrefix}/users`, userRoutes);
+app.use(`${apiPrefix}/organizations`, organizationRoutes);
+app.use(`${apiPrefix}/firewall-configs`, firewallConfigRoutes);
+app.use(`${apiPrefix}/firewall-logs`, firewallLogRoutes);
+app.use(`${apiPrefix}/user-organization`, userOrganizationRoutes);
+app.use(`${apiPrefix}/admin`, adminSetupRoutes);
+
+// Serve static files in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../public')));
+  
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public', 'index.html'));
+  });
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  logger.error(`Error: ${err.message}`, { stack: err.stack });
-  res.status(err.status || 500).json({
-    message: err.message || 'Internal Server Error',
-    error: process.env.NODE_ENV === 'development' ? err : {}
-  });
+  console.error(err.stack);
+  res.status(500).json({ message: 'Something went wrong!' });
 });
 
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({ message: 'Route not found' });
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
-// Initialize database and start server
-const startServer = async () => {
-  try {
-    // Connect to database
-    await sequelize.authenticate();
-    logger.info('Connected to PostgreSQL database');
-    
-    // Connect to Redis
-    await connectRedis();
-    logger.info('Connected to Redis');
-    
-    // Connect to RabbitMQ
-    await connectRabbitMQ();
-    logger.info('Connected to RabbitMQ');
-    
-    // Start server
-    app.listen(PORT, '0.0.0.0', () => {
-      logger.info(`Server running on port ${PORT}`);
-      logger.info(`API available at http://localhost:${PORT}/api/${API_VERSION}`);
-    });
-  } catch (error) {
-    logger.error('Failed to start server:', error);
-    process.exit(1);
-  }
-};
-
-// Start the server
-startServer();
-
-module.exports = app; // Export for testing
+module.exports = app;
