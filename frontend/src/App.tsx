@@ -95,7 +95,8 @@ const App: React.FC = () => {
                 </ProtectedRoute>
               }
             />
-            <Route path="/*" element={<NotFound />} />
+            {/* Catch-all route with explicit regex pattern instead of wildcard */}
+            <Route path="/:path(.+)" element={<NotFound />} />
           </Routes>
         </Router>
       </AuthProvider>
