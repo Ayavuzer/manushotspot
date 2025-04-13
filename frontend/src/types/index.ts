@@ -7,8 +7,10 @@ export interface User {
   last_name: string | null;
   phone: string | null;
   role: string | null;
+  role_id: number;  // Added role_id property
   is_super_admin: boolean;
   organization_id: number | null;
+  is_active: boolean;  // Added is_active property
   last_login: string | null;
   created_at: string;
 }
